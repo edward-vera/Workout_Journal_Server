@@ -11,5 +11,5 @@ CREATE TABLE todos (
 INSERT INTO todos VALUES (
     null,
     "walk the fish",
-    "1",
+    "1"
 )
