@@ -1,45 +1,16 @@
 const express = require("express");
-
 const app = express();
-
 const pool = require("./sql/connection")
+const userRoutes = require("./routes/users")
 
 const PORT = process.env.PORT || 5000
 
 app.use(express.json())
+app.use('/users', userRoutes);
+// app.use('/todos', todosRoutes);
 
 app.get('/', (req, res) => {
-    res.json({message: "Hello Universe"})
+    res.json({message: "Welcome to the API"})
 });
-
-//  GET list of users
-app.get('/users', (req, res) => {
-    pool.query(`SELECT * FROM users`, function (err, rows, fields) {
-        // Connection is automatically released when query resolves
-    res.json(rows); 
-    })
-});
-
-// GET User by id
-app.get('/users/:id', (req, res) => {
-    const {id} = req.params
-    pool.query(`SELECT * FROM users WHERE id = ${id}`, function (err, rows, fields) {
-        // Connection is automatically released when query resolves
-    res.json(rows)
-    })
-});
-
-// POST User by id
-app.post('/users', (req, res) => {
-    console.log(req.body);
-    pool.query(`INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)`, 
-    [null, req.body.name, req.body.email, req.body.password],
-    function (err, row, fields) {
-        // Connection is automatically released when query resolves
-    res.json(row);
-    })
-});
-
-
 
 app.listen(PORT, () => console.log(`Listening @ http://localhost:${PORT}`));
