@@ -8,8 +8,8 @@ CREATE TABLE todos (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-INSERT INTO users VALUES (
+INSERT INTO todos VALUES (
     null,
-    "walk the fist",
-    "me@test.com",
+    "walk the fish",
+    "1",
 )
