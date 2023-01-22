@@ -1,15 +1,24 @@
 const pool = require("../sql/connection");
 
+// const list = (req, res) => {
+//     pool.query(`SELECT * FROM todos`, function (err, rows, fields) {
+//     res.json(rows)
+//     })
+// };
+
+// Get list of todos for user
 const list = (req, res) => {
-    const {id} = req.params
-    pool.query(`SELECT * FROM todos`, function (err, rows, fields) {
+    // console.log(req.user);
+    const {id} = req.user
+    // console.log(id);
+    pool.query(`SELECT * FROM todos WHERE user_id = ${id}`, function (err, rows, fields) {
     res.json(rows)
     })
 };
 
 const show = (req, res) => {
-    const {id} = req.params
-    pool.query(`SELECT * FROM todos WHERE id = ${id}`, function (err, rows, fields) {
+    const {id} = req.params;
+    pool.query(`SELECT * FROM todos WHERE id = (?)`, function (err, rows, fields) {
     res.json(rows)
     })
 };

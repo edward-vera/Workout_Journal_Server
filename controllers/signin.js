@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken")
 
 const generateToken = (user) => {
-    return jwt.sign(user, "tacos is good")
+    return jwt.sign(user, process.env.JWT_SECRET)
 }
 
 const signin = (req, res) => {
@@ -14,7 +14,7 @@ const signin = (req, res) => {
         `SELECT * FROM users WHERE email = '${email}'`,
         async (err, results, fields) => {
         const match = await bcrypt.compare(password, results[0].password)
-        console.log(match);
+        // console.log(match);
             
         if(match) {
             const token = generateToken(results[0]);
@@ -22,7 +22,6 @@ const signin = (req, res) => {
                 token,
                 user: req.user,
             })
-            console.log(token);
         }
     }
   );
