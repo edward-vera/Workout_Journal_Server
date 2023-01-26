@@ -13,4 +13,4 @@ INSERT INTO users VALUES (
     "me",
     "me@test.com",
     "me123"
-)
+);

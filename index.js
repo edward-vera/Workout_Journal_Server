@@ -1,12 +1,20 @@
+// Imports
 const express = require("express");
+const cors = require("cors")
 const jwt = require("jsonwebtoken")
+
+// Accessing express
 const app = express();
-// const pool = require("./sql/connection")
-const userRoutes = require("./routes/users")
-const todosRoutes = require("./routes/todos")
+
+// Importing Routers
 const signupRoutes = require("./routes/signup")
 const signinRoutes = require("./routes/signin")
+const userRoutes = require("./routes/users")
+const workoutsRoutes = require("./routes/workouts")
+const exerciseRoutes = require("./routes/exercises")
+const calorieRoutes = require("./routes/calorietracker")
 
+// Importing Ports
 const PORT = process.env.PORT || 5000
 
 // Create function to authenticate toke that we get back from the signin route
@@ -37,14 +45,50 @@ function authenticateToken(req, res, next) {
     })
     };
 
+    // Use cors for cross page communication
+app.use(cors());
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    // !! THIS IS FOR DEV - We replace this once we have out production URL in place.
+    res.setHeader('Access-Control-Allow-Origin', '*')
+
+    // res.setHeader(
+    //     'Access-Control-Allow-Origin',
+    //     'workout-journal-server.vercel.app'
+    // );
+
+    // Request methods you wish to allow
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, PUT, POST, DELETE');
+
+    // Request headers you with to allow
+    res.setHeader(
+    'Access-Control-Allow-Headers', 
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+
+    // Set to true if you need the website to inclue cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of Middleware
+    next();
+});
+
+// Using the route variables above
 app.use(express.json())
-app.use('/users', authenticateToken, userRoutes);
-app.use('/todos', authenticateToken, todosRoutes);
 app.use('/signup', signupRoutes);
 app.use('/signin', signinRoutes);
+app.use('/users', userRoutes);
+app.use('/workouts', workoutsRoutes);
+app.use('/exercises', exerciseRoutes);
+app.use('/calories', calorieRoutes)
 
+// Base route to make sure app is working
 app.get('/', (req, res) => {
     res.json({message: "Welcome to the API"})
 });
 
-app.listen(PORT, () => console.log(`Listening @ http://localhost:${PORT}`));
+// Show what port you're on
+app.listen(PORT, () => console.log(`Listening @ https://localhost:${PORT}`));
