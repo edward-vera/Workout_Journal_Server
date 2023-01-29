@@ -7,13 +7,24 @@ const pool = require("../sql/connection");
 // };
 
 
-// // Get list of exercises for user
+// Get list of exercises for user
 const list = (req, res) => {
-    const {user} = req.params;
     // console.log(req.user);
     // console.log(user);
     pool.query(
-    `SELECT * FROM exercises WHERE workout_id = ${Number(req.workouts.id)}`,
+    `SELECT 
+    workouts.workoutId,
+    workouts.workout, 
+    exercises.exerciseName, 
+    exercises.muscleTarget,
+    exercises.equipmentType, 
+    exercises.sets, 
+    exercises.reps, 
+    exercises.weight, 
+    exercises.duration, 
+    exercises.notes
+    FROM workouts
+    INNER JOIN exercises on exercises.workoutId=workouts.workoutId;`,
     function (err, rows, fields) {
     res.json({ rows, exercise: req.exercise })
     })

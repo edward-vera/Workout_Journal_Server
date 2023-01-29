@@ -9,10 +9,11 @@ const pool = require("../sql/connection");
 
 // Get list of workouts for user
 const list = (req, res) => {
-    // console.log(req.user);
-    // console.log(id);
+    // console.log(req);
+    // console.log(req.user.id);
     pool.query(`SELECT * FROM workouts WHERE user_id = ${Number(req.user.id)}`,
     function (err, rows, fields) {
+    console.log(rows)
     res.json({ rows, user: req.user })
     })
 };

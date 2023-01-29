@@ -14,7 +14,7 @@ const signin = (req, res) => {
         `SELECT * FROM users WHERE email = '${email}'`,
         async (err, results, fields) => {
         const match = await bcrypt.compare(password, results[0].password)
-        // console.log(match);
+        console.log(match);
             
         if(match) {
             const token = generateToken(results[0]);

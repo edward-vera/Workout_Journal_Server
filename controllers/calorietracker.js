@@ -1,21 +1,22 @@
 const pool = require("../sql/connection");
 
-// const all = (req, res) => {
-//     pool.query(`SELECT * FROM calories`, function (err, rows, fields) {
-//     res.json(rows)
-//     })
-// };
+const all = (req, res) => {
+    pool.query(`SELECT * FROM calories`, function (err, rows, fields) {
+    res.json(rows)
+    })
+};
 
 
 // Get list of calories for user
-const list = (req, res) => {
-    // console.log(req.user);
-    // console.log(user);
-    pool.query(`SELECT * FROM calories WHERE user_id = ${Number(req.user.id)}`,
-    function (err, rows, fields) {
-    res.json({ rows, user: req.user })
-    })
-};
+// const list = (req, res) => {
+//     console.log(req.user.id);
+//     console.log(req);
+//     pool.query(`SELECT * FROM calories WHERE userId = ${Number(req.user.id)}`,
+//     function (err, rows, fields) {
+//     console.log(rows)
+//     res.json({ rows, user: req.user })
+//     })
+// };
 
 // GET
 const show = (req, res) => {
@@ -59,8 +60,8 @@ const remove = (req, res) => {
 
 
 module.exports = {
-    // all,
-    list,
+    all,
+    // list,
     show,
     create,
     update,

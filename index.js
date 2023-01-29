@@ -49,7 +49,6 @@ function authenticateToken(req, res, next) {
 app.use(cors());
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    // !! THIS IS FOR DEV - We replace this once we have out production URL in place.
     res.setHeader('Access-Control-Allow-Origin', '*')
 
     // res.setHeader(
@@ -80,10 +79,10 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/signup', signupRoutes);
 app.use('/signin', signinRoutes);
-app.use('/users', userRoutes);
-app.use('/workouts', workoutsRoutes);
-app.use('/exercises', exerciseRoutes);
-app.use('/calories', calorieRoutes)
+app.use('/users', authenticateToken, userRoutes);
+app.use('/workouts', authenticateToken, workoutsRoutes);
+app.use('/workoutsId', exerciseRoutes);
+app.use('/calorietracker', calorieRoutes);
 
 // Base route to make sure app is working
 app.get('/', (req, res) => {
