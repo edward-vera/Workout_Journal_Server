@@ -79,8 +79,8 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/signup', signupRoutes);
 app.use('/signin', signinRoutes);
-app.use('/users', authenticateToken, userRoutes);
-app.use('/workouts', authenticateToken, workoutsRoutes);
+app.use('/users', userRoutes);
+app.use('/workouts', workoutsRoutes);
 app.use('/workoutsId', exerciseRoutes);
 app.use('/calorietracker', calorieRoutes);
 
