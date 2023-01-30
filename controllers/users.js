@@ -15,7 +15,7 @@ const show = (req, res) => {
 };
 
 const create = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     pool.query(`INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)`, 
     [null, req.body.name, req.body.email, req.body.password],
     function (err, row, fields) {

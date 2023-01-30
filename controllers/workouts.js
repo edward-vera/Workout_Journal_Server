@@ -13,7 +13,7 @@ const list = (req, res) => {
     // console.log(req.user.id);
     pool.query(`SELECT * FROM workouts WHERE user_id = ${Number(req.user.id)}`,
     function (err, rows, fields) {
-    console.log(rows)
+    // console.log(rows)
     res.json({ rows, user: req.user })
     })
 };

@@ -8,13 +8,13 @@ const generateToken = (user) => {
 
 const signin = (req, res) => {
     const {email, password} = req.body;
-    console.log(email, password);
+    // console.log(email, password);
 
     pool.query(
         `SELECT * FROM users WHERE email = '${email}'`,
         async (err, results, fields) => {
         const match = await bcrypt.compare(password, results[0].password)
-        console.log(match);
+        // console.log(match);
             
         if(match) {
             const token = generateToken(results[0]);

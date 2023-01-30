@@ -42,7 +42,7 @@ const show = (req, res) => {
 
 // POST
 const create = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     pool.query(`INSERT INTO exercises (id, workoutId, exerciseName, muscleTarget, equipmentType, sets, reps, weight, duration, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`, 
     [null, req.body.workoutId, req.body.exerciseName, req.body.muscleTarget, req.body.equipmentType, req.body.sets, req.body.reps, req.body.weight, req.body.duration, req.body.notes],
     function (err, row, fields) {
@@ -52,8 +52,8 @@ const create = (req, res) => {
 
 // PUT
 const update = (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.body);
     const { id } = req.params;
     pool.query(`UPDATE exercises SET ? WHERE id = ?`, 
     [req.body, id],

@@ -29,8 +29,8 @@ const show = (req, res) => {
 // POST
 const create = (req, res) => {
     // console.log(req.body);
-    pool.query(`INSERT INTO calories (id, meal, userId, ingredients, calories, fat, protein) VALUES (?, ? ,?, ?, ?, ?, ?)`, 
-    [null, req.body.meal, req.body.userId, req.body.ingredients, req.body.calories, req.body.fat, req.body.protein],
+    pool.query(`INSERT INTO calories (id, meal, ingredients, calorie, fat, protein) VALUES (?, ?, ?, ?, ?, ?)`, 
+    [null, req.body.meal, req.body.ingredients, req.body.calorie, req.body.fat, req.body.protein],
     function (err, row, fields) {
     res.json(row);
     })
@@ -38,8 +38,8 @@ const create = (req, res) => {
 
 // PUT
 const update = (req, res) => {
-    console.log(req.body);
-    console.log(req.params);
+    // console.log(req.body);
+    // console.log(req.params);
     const { id } = req.params;
     pool.query(`UPDATE calories SET ? WHERE id = ?`, 
     [req.body, id],
