@@ -3,7 +3,7 @@ const router = express.Router();
 const exercisesControllers = require("../controllers/exercises")
 
 // router.get('/', exercisesControllers.all);
-router.get('/', exercisesControllers.list);
+router.get('/workout/:id', exercisesControllers.list);
 router.get('/:id', exercisesControllers.show);
 router.post('/', exercisesControllers.create);
 router.put('/:id', exercisesControllers.update);

@@ -11,6 +11,7 @@ const pool = require("../sql/connection");
 const list = (req, res) => {
     // console.log(req.user);
     // console.log(user);
+    const {id} = req.params;
     pool.query(
     `SELECT 
     workouts.workoutId,
@@ -24,7 +25,9 @@ const list = (req, res) => {
     exercises.duration, 
     exercises.notes
     FROM workouts
-    INNER JOIN exercises on exercises.workoutId=workouts.workoutId;`,
+    INNER JOIN exercises on exercises.workoutId=workouts.workoutId 
+    WHERE workouts.workoutId = ?;`,
+    [id],
     function (err, rows, fields) {
     res.json({ rows, exercise: req.exercise })
     })
