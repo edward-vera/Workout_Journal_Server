@@ -1,22 +1,25 @@
 const pool = require("../sql/connection");
 
-const all = (req, res) => {
-    pool.query(`SELECT * FROM calories`, function (err, rows, fields) {
-    res.json(rows)
-    })
-};
+// const all = (req, res) => {
+//     pool.query(`SELECT * FROM calories`, function (err, rows, fields) {
+//     res.json(rows)
+//     })
+// };
 
 
 // Get list of calories for user
-// const list = (req, res) => {
-//     console.log(req.user.id);
-//     console.log(req);
-//     pool.query(`SELECT * FROM calories WHERE userId = ${Number(req.user.id)}`,
-//     function (err, rows, fields) {
-//     console.log(rows)
-//     res.json({ rows, user: req.user })
-//     })
-// };
+const list = (req, res) => {
+    console.log(req.user);
+    pool.query(`SELECT * FROM calorie_tracker WHERE user_id = ${req.user.id}`,
+    function (err, rows, fields) {
+        if(err){
+            console.log(err)
+            return res.status(500).json({error:err})
+        }
+    console.log(rows)
+    res.json({ rows, user: req.user })
+    })
+};
 
 // GET
 const show = (req, res) => {
@@ -29,7 +32,7 @@ const show = (req, res) => {
 // POST
 const create = (req, res) => {
     // console.log(req.body);
-    pool.query(`INSERT INTO calories (id, meal, ingredients, calorie, fat, protein) VALUES (?, ?, ?, ?, ?, ?)`, 
+    pool.query(`INSERT INTO calories (id, meal, ingredients, calorie, fat, protein) VALUES ( ?, ?, ?, ?, ?, ?)`, 
     [null, req.body.meal, req.body.ingredients, req.body.calorie, req.body.fat, req.body.protein],
     function (err, row, fields) {
     res.json(row);
@@ -60,8 +63,8 @@ const remove = (req, res) => {
 
 
 module.exports = {
-    all,
-    // list,
+    // all,
+    list,
     show,
     create,
     update,

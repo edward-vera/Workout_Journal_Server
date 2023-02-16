@@ -1,22 +1,22 @@
 const pool = require("../sql/connection");
 
-const all = (req, res) => {
-    pool.query(`SELECT * FROM workouts`, function (err, rows, fields) {
-    res.json(rows)
-    })
-};
+// const all = (req, res) => {
+//     pool.query(`SELECT * FROM workouts`, function (err, rows, fields) {
+//     res.json(rows)
+//     })
+// };
 
 
 // Get list of workouts for user
-// const list = (req, res) => {
-//     // console.log(req);
-//     // console.log(req.user.id);
-//     pool.query(`SELECT * FROM workouts WHERE user_id = ${Number(req.user.id)}`,
-//     function (err, rows, fields) {
-//     // console.log(rows)
-//     res.json({ rows, user: req.user })
-//     })
-// };
+const list = (req, res) => {
+    // console.log(req);
+    // console.log(req.user.id);
+    pool.query(`SELECT * FROM workouts WHERE user_id = ${Number(req.user.id)}`,
+    function (err, rows, fields) {
+    // console.log(rows)
+    res.json({ rows, user: req.user })
+    })
+};
 
 const show = (req, res) => {
     const {id} = req.params;
@@ -57,8 +57,8 @@ const remove = (req, res) => {
 
 
 module.exports = {
-    all,
-    // list,
+    // all,
+    list,
     show,
     create,
     update,

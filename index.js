@@ -79,10 +79,10 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/signup', signupRoutes);
 app.use('/signin', signinRoutes);
-app.use('/users', userRoutes);
-app.use('/workouts', workoutsRoutes);
+app.use('/users', authenticateToken, userRoutes);
+app.use('/workouts', authenticateToken, workoutsRoutes);
 app.use('/workoutsId', exerciseRoutes);
-app.use('/calorietracker', calorieRoutes);
+app.use('/calorietracker', authenticateToken, calorieRoutes);
 
 // Base route to make sure app is working
 app.get('/', (req, res) => {

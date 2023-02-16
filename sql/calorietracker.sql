@@ -2,9 +2,9 @@ CREATE TABLE calorie_tracker (
     id INT AUTO_INCREMENT PRIMARY KEY,
     meal VARCHAR(255) NOT NULL,
     ingredients VARCHAR(255) NOT NULL,
-    calories INT NOT NULL,
+    calorie INT NOT NULL,
     fat INT NOT NULL,
-    protien INT NOT NULL,
+    protein INT NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
