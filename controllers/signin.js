@@ -19,8 +19,13 @@ const signin = (req, res) => {
               }
         
               console.log(results);
-
-        const match = await bcrypt.compare(password, results[0].password)
+              try {
+                  const match = await bcrypt.compare(password, results[0].password)
+                
+              } catch (error) {
+                console.log(error)
+                res.json(error)
+              }
         // console.log(match);
             
         if(match) {
