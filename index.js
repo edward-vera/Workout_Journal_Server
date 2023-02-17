@@ -47,33 +47,33 @@ function authenticateToken(req, res, next) {
     })
     };
 
-// app.use(function (req, res, next) {
-//     // Website you wish to allow to connect
-//     res.setHeader('Access-Control-Allow-Origin', '*')
+app.use(function (req, res, next) {
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*')
 
-//     // res.setHeader(
-//     //     'Access-Control-Allow-Origin',
-//     //     'workout-journal-server.vercel.app'
-//     // );
+    // res.setHeader(
+    //     'Access-Control-Allow-Origin',
+    //     'workout-journal-server.vercel.app'
+    // );
 
-//     // Request methods you wish to allow
-//     res.setHeader(
-//         'Access-Control-Allow-Methods',
-//         'GET, PUT, POST, DELETE');
+    // Request methods you wish to allow
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, PUT, POST, DELETE');
 
-//     // Request headers you with to allow
-//     res.setHeader(
-//     'Access-Control-Allow-Headers', 
-//     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-//     );
+    // Request headers you with to allow
+    res.setHeader(
+    'Access-Control-Allow-Headers', 
+    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
 
-//     // Set to true if you need the website to inclue cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', true);
+    // Set to true if you need the website to inclue cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
-//     // Pass to next layer of Middleware
-//     next();
-// });
+    // Pass to next layer of Middleware
+    next();
+});
 
 // Using the route variables above
 app.use(express.json())
