@@ -16,6 +16,7 @@ const list = (req, res) => {
     `SELECT 
     workouts.workoutId,
     workouts.workout, 
+    exercises.id,
     exercises.exerciseName, 
     exercises.muscleTarget,
     exercises.equipmentType, 
