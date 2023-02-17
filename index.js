@@ -21,22 +21,23 @@ const PORT = process.env.PORT || 5000
 function authenticateToken(req, res, next) {
     // console.log(req.headers);
     // Get meta information for req
+    console.log(req.headers.authorization)
     const authHeader = req.headers.authorization;
     // console.log( {auth: authHeader} );
     
-    if(!authHeader) return res.sendStatus(403);
+    if(!authHeader) return res.status(403).json({err: 'No Header'});
     // Store just the token in a variable
     const token = authHeader.split(" ")[1];
     // console.log(token);
-
+    console.log('token***********', token)
     // What if no token
-    if(!token) return sendStatus(403);
+    if(!token) return res.sendStatus(403);
 
 
     // If there is token
     // Verify it!
     jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-        // console.log({ user });
+        console.log({ user });
         if(err) return res.sendStatus(403);
 
         req.user = user;
@@ -91,5 +92,5 @@ app.get('/', (req, res) => {
 
 // Show what port you're on
 app.listen(PORT,
-    //  () => console.log(`Listening @ https://localhost:${PORT}`)
+     () => console.log(`Listening @ https://localhost:${PORT}`)
      );

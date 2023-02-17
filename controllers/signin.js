@@ -13,6 +13,13 @@ const signin = (req, res) => {
     pool.query(
         `SELECT * FROM users WHERE email = '${email}'`,
         async (err, results, fields) => {
+
+            if (err) {
+                console.log(err);
+              }
+        
+              console.log(results);
+
         const match = await bcrypt.compare(password, results[0].password)
         // console.log(match);
             

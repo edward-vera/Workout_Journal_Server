@@ -28,7 +28,7 @@ const show = (req, res) => {
 // POST
 const create = (req, res) => {
     // console.log(req.body);
-    pool.query(`INSERT INTO workouts (id, workout, user_id) VALUES (?, ?, ?)`, 
+    pool.query(`INSERT INTO workouts (workoutId, workout, user_id) VALUES (?, ?, ?)`, 
     [null, req.body.workout, req.body.user_id],
     function (err, row, fields) {
     res.json(row);

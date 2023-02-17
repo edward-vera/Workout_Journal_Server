@@ -8,7 +8,7 @@ const signup = async (req, res) => {
 
     // console.log({ hashedPassword });
 
-        pool.query(`INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)`, 
+    pool.query(`INSERT INTO users (id, name, email, password) VALUES (?, ?, ?, ?)`, 
     [null, name, email, hashedPassword],
     function (err, row, fields) {
     res.json(row);
