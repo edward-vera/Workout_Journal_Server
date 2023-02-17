@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken")
 
 // Accessing express
 const app = express();
+app.use(cors());
 
 // Importing Routers
 const signupRoutes = require("./routes/signup")
@@ -47,7 +48,6 @@ function authenticateToken(req, res, next) {
     };
 
     // Use cors for cross page communication
-app.use(cors());
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*')
