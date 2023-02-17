@@ -71,6 +71,7 @@ const remove = (req, res) => {
     pool.query(`DELETE FROM exercises WHERE id = ?`, 
     [id],
     function (err, row, fields) {
+        if (err) res.json(err)
     res.json(row);
     })
 };
